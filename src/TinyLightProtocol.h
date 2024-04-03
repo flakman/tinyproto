@@ -63,6 +63,7 @@ class Light
 public:
     inline Light()
         : m_data{}
+        , m_user_pointer(nullptr)
     {
     }
 
@@ -74,7 +75,7 @@ public:
      * @param readcb  - read function from some physical channel
      * @return None
      */
-    void begin(write_block_cb_t writecb, read_block_cb_t readcb);
+    void begin(write_block_cb_t writecb, read_block_cb_t readcb, void* user_pointer);
 
 #ifdef ARDUINO
     /**
@@ -212,10 +213,18 @@ public:
      */
     bool enableCrc32();
 
+    /**
+     * Return m_user_pointer
+    */
+    inline void* getUserPointer() const {return m_user_pointer;};
+
 private:
     STinyLightData m_data{};
 
     hdlc_crc_t m_crc = HDLC_CRC_DEFAULT;
+
+    /// user-specific pointer
+    void* m_user_pointer;
 };
 
 /**

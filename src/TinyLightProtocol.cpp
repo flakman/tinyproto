@@ -41,8 +41,9 @@ namespace tinyproto
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
-void Light::begin(write_block_cb_t writecb, read_block_cb_t readcb)
+void Light::begin(write_block_cb_t writecb, read_block_cb_t readcb, void* user_pointer)
 {
+    m_user_pointer = user_pointer;
     m_data.crc_type = m_crc;
     tiny_light_init(&m_data, writecb, readcb, this);
 }
