@@ -57,7 +57,7 @@ extern "C"
 /**
  * This macro defines buffer size required for tiny light protocol
  */
-#define LIGHT_BUF_SIZE (sizeof(uintptr_t) * 16)
+#define LIGHT_BUF_SIZE (sizeof(uintptr_t) * 17)
 
     /**
      * This structure contains information about communication channel and its state.
@@ -139,7 +139,7 @@ extern "C"
      *       to the function is too small to fit all.
      * @remarks This function is not thread safe.
      */
-    extern int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len);
+    extern int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len, int timeout);
 
     /**
      * @brief returns lower level hdlc handle.
