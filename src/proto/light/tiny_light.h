@@ -127,7 +127,8 @@ extern "C"
      * The function reads user data from communication channel
      * @param handle - pointer to Tiny Light data.
      * @param pbuf a const pointer to unsigned char - buffer with data to send
-     * @param len an integer argument - length of data to send
+     * @param len an integer argument - length of data to receive
+     * @param timeout an integer argument - receive timeout
      * @see TINY_ERR_INVALID_DATA
      * @see TINY_ERR_FAILED
      * @see TINY_ERR_DATA_TOO_LARGE

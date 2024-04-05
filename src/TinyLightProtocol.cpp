@@ -58,9 +58,9 @@ int Light::write(char *buf, int size)
     return tiny_light_send(&m_data, (uint8_t *)buf, size);
 }
 
-int Light::read(char *buf, int size)
+int Light::read(char *buf, int size, int timeout)
 {
-    return tiny_light_read(&m_data, (uint8_t *)buf, size);
+    return tiny_light_read(&m_data, (uint8_t *)buf, size, timeout);
 }
 
 int Light::write(const IPacket &pkt)
@@ -68,9 +68,9 @@ int Light::write(const IPacket &pkt)
     return tiny_light_send(&m_data, pkt.m_buf, pkt.m_len) > 0;
 }
 
-int Light::read(IPacket &pkt)
+int Light::read(IPacket &pkt, int timeout)
 {
-    int len = tiny_light_read(&m_data, pkt.m_buf, pkt.m_size);
+    int len = tiny_light_read(&m_data, pkt.m_buf, pkt.m_size, timeout);
     pkt.m_p = 0;
     pkt.m_len = len;
     return len;

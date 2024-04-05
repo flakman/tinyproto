@@ -4,10 +4,41 @@ option(EXAMPLES "Build examples and tiny_loopback" OFF)
 option(UNITTEST "Build unit tests" OFF)
 option(CUSTOM "Do not use built-in HAL, but use Custom instead" OFF)
 option(ENABLE_FD_LOGS "Enable full duplex protocol logs" OFF)
+option(QT_HAL "Enable Qt hal" ON)
 # set(LOG_LEVEL "0" CACHE STRING "Logging level option" FORCE)
 
-file(GLOB_RECURSE SOURCE_FILES src/*.cpp src/*.c)
-file(GLOB_RECURSE HEADER_FILES src/*.h)
+# file(GLOB_RECURSE SOURCE_FILES src/*.cpp src/*.c)
+# file(GLOB_RECURSE HEADER_FILES src/*.h)
+
+set(SOURCE_FILES
+    src/TinyLightProtocol.h
+    src/TinyLightProtocol.cpp
+    src/TinyPacket.h
+
+    src/proto/crc/tiny_crc.h
+    src/proto/crc/tiny_crc.c
+
+    src/proto/hdlc/low_level/hdlc_int.h
+    src/proto/hdlc/low_level/hdlc.h
+    src/proto/hdlc/low_level/hdlc.c
+
+    src/proto/hdlc/high_level/hdlc.h
+    src/proto/hdlc/high_level/hdlc.c
+
+    src/proto/light/tiny_light.h
+    src/proto/light/tiny_light.c
+
+    src/hal/tiny_debug.h
+    src/hal/tiny_list.h
+    src/hal/tiny_list.c
+    # src/hal/tiny_serial.h
+    # src/hal/tiny_serial.c
+    src/hal/tiny_types.h
+    src/hal/tiny_types.c
+
+    src/hal/qt/qt_hal.h
+    src/hal/qt/qt_hal.cpp
+)
 
 if (NOT DEFINED COMPONENT_DIR)
 
@@ -15,7 +46,7 @@ if (NOT DEFINED COMPONENT_DIR)
 
     include_directories(src)
 
-    add_library(tinyproto STATIC ${HEADER_FILES} ${SOURCE_FILES})
+    add_library(tinyproto STATIC ${SOURCE_FILES})
 
     if (EXAMPLES)
         add_subdirectory(examples/linux/loopback)
@@ -43,4 +74,11 @@ if (ENABLE_FD_LOGS)
     if (LOG_LEVEL)
        add_definitions("-DTINY_LOG_LEVEL_DEFAULT=${LOG_LEVEL}")
     endif()
+endif()
+
+if (QT_HAL)
+    find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core;)
+    find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core;)
+
+    target_link_libraries(tinyproto PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 endif()

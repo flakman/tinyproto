@@ -157,7 +157,7 @@ static int on_frame_read(void *user_data, void *data, int len)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len , int timeout)
+int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len, int timeout)
 {
     uint32_t ts = tiny_millis();
     int result = 0;

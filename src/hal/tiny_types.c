@@ -33,6 +33,8 @@
 // Do not include anything here, there is tiny_types_cpp.cpp for it
 #elif defined(TINY_CUSTOM_PLATFORM)
 #include "no_platform/no_platform_hal.inl"
+#elif defined(__tiny_Qt_hal__)
+#include "qt/qt_hal.cpp"
 #elif defined(__AVR__)
 #include "avr/avr_hal.inl"
 #elif defined(__XTENSA__)

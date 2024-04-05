@@ -149,7 +149,7 @@ public:
      *         zero if nothing is read
      *         positive - number of bytes read from the channel
      */
-    int read(char *buf, int size);
+    int read(char *buf, int size, int timeout);
 
     /**
      * Sends packet over communication channel.
@@ -169,7 +169,7 @@ public:
      *         zero if nothing is read
      *         positive - Packet is successfully received
      */
-    int read(IPacket &pkt);
+    int read(IPacket &pkt, int timeout);
 
     /**
      * Disable CRC field in the protocol.
