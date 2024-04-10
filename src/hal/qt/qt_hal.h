@@ -1,10 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-#include <time.h>
-
-#include <QMutex>
-#include <QWaitCondition>
 
 #ifndef CONFIG_ENABLE_CHECKSUM
 #define CONFIG_ENABLE_CHECKSUM
@@ -20,22 +16,16 @@
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
-/**
- * Mutex type used by Tiny Protocol implementation.
- * The type declaration depends on platform.
- */
-typedef QMutex tiny_mutex_t;
 
-/**
- * Events group type used by Tiny Protocol implementation.
- * The type declaration depends on platform.
- */
+typedef uintptr_t tiny_mutex_t;
+typedef uintptr_t tiny_cond_t;
+
 typedef struct
 {
     uint8_t bits;
     uint16_t waiters;
-    QMutex mutex;
-    QWaitCondition cond;
+    tiny_mutex_t m_mutex;
+    tiny_cond_t  m_cond;
 } tiny_events_t;
 
 #endif

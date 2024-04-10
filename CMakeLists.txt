@@ -36,8 +36,10 @@ set(SOURCE_FILES
     src/hal/tiny_types.h
     src/hal/tiny_types.c
 
-    src/hal/qt/qt_hal.h
-    src/hal/qt/qt_hal.cpp
+    src/hal/tiny_types_cpp.cpp
+
+    # src/hal/qt/qt_hal.h
+    # src/hal/qt/qt_hal.inl
 )
 
 if (NOT DEFINED COMPONENT_DIR)

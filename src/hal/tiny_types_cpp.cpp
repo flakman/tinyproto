@@ -30,7 +30,9 @@
 #include "tiny_debug.h"
 
 #if defined(CONFIG_ENABLE_CPP_HAL)
-#include "cpp/cpp_hal.inl"
+    #include "cpp/cpp_hal.inl"
+#elif defined(__tiny_Qt_hal__)
+    #include "qt/qt_hal.inl"
 #endif
 
 #if 0

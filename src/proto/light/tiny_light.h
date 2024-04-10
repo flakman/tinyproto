@@ -140,7 +140,7 @@ extern "C"
      *       to the function is too small to fit all.
      * @remarks This function is not thread safe.
      */
-    extern int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len, int timeout);
+    extern int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len, uint32_t timeout);
 
     /**
      * @brief returns lower level hdlc handle.

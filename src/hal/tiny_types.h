@@ -42,10 +42,10 @@ extern "C"
 
 #if defined(CONFIG_ENABLE_CPP_HAL)
 #include "cpp/cpp_hal.h"
-#elif defined(TINY_CUSTOM_PLATFORM)
-#include "no_platform/no_platform_hal.h"
 #elif defined(__tiny_Qt_hal__)
 #include "qt/qt_hal.h"
+#elif defined(TINY_CUSTOM_PLATFORM)
+#include "no_platform/no_platform_hal.h"
 #elif defined(__AVR__)
 #include "avr/avr_hal.h"
 #elif defined(__XTENSA__)
