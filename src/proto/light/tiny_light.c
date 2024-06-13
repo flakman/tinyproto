@@ -102,6 +102,14 @@ int tiny_light_close(STinyLightData *handle)
  *
  ***************************************************************/
 
+#ifndef TINY_STATIC_READ_BUF_SZ
+#define TINY_STATIC_READ_BUF_SZ 128
+#endif
+
+#ifndef TINY_STATIC_WRITE_BUF_SZ
+#define TINY_STATIC_WRITE_BUF_SZ 128
+#endif
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 static int on_frame_sent(void *user_data, const void *data, int len)
@@ -118,7 +126,7 @@ int tiny_light_send(STinyLightData *handle, const uint8_t *pbuf, int len)
     hdlc_ll_put(handle->_hdlc, pbuf, len);
     while ( handle->_hdlc->tx.origin_data )
     {
-        uint8_t stream[1];
+        uint8_t stream[TINY_STATIC_WRITE_BUF_SZ];
         int stream_len = hdlc_ll_run_tx(handle->_hdlc, stream, sizeof(stream));
         do
         {
@@ -166,7 +174,7 @@ int tiny_light_read(STinyLightData *handle, uint8_t *pbuf, int len, uint32_t tim
     handle->rx_len = 0;
     do
     {
-        uint8_t stream[1];
+        uint8_t stream[TINY_STATIC_READ_BUF_SZ];
         int stream_len = handle->read_func(handle->user_data, stream, sizeof(stream));
         if ( stream_len < 0 )
         {
