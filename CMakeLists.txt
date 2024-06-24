@@ -84,3 +84,6 @@ if (QT_HAL)
 
     target_link_libraries(tinyproto PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 endif()
+
+add_definitions(-DTINY_STATIC_READ_BUF_SZ=4096)
+add_definitions(-DTINY_STATIC_WRITE_BUF_SZ=4096)

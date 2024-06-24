@@ -103,7 +103,7 @@ int tiny_light_close(STinyLightData *handle)
  ***************************************************************/
 
 #ifndef TINY_STATIC_READ_BUF_SZ
-#define TINY_STATIC_READ_BUF_SZ 128
+#define TINY_STATIC_READ_BUF_SZ 1
 #endif
 
 #ifndef TINY_STATIC_WRITE_BUF_SZ

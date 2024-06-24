@@ -112,9 +112,14 @@ void tiny_sleep_us(uint32_t us)
 uint32_t tiny_millis()
 {
     static QElapsedTimer timer;
-    timer.start();
 
-    // ms since system startup:
+    // We must call start() every time before calling msecsSinceReference() method to get 
+    // count of milliseconds since system startup. See Qt QElapsedTimer::msecsSinceReference() 
+    // documentation.
+    timer.start(); 
+
+    // Qt doc: Returns the number of milliseconds between last time this QElapsedTimer 
+    // object was started and its reference clock's start.
     return timer.msecsSinceReference();
 }
 
@@ -127,8 +132,7 @@ uint32_t tiny_micros()
     }
 
     const qint64 elapsed_ns = timer.nsecsElapsed();
-    const uint32_t elapsed_us = static_cast<uint32_t>(elapsed_ns / 1000 + (((elapsed_ns % 1000) < 500) ? 0 : 1));
-
+    
     // us since start the timer (first call of this function):
-    return elapsed_us;
+    return static_cast<uint32_t>(elapsed_ns / 1000 + (((elapsed_ns % 1000) < 500) ? 0 : 1));
 }
